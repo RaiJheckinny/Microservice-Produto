@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -18,7 +19,7 @@ public class ProdutoService implements IProdutoService{
     @Override
     public Produto create(CreateProdutoDTO createProdutoDTO) {
         Produto produto = new Produto(createProdutoDTO);
-        repository.save(produto);
+        produto = repository.save(produto);
         return produto;
     }
 
@@ -49,5 +50,8 @@ public class ProdutoService implements IProdutoService{
     @Override
     public List<Produto> getAll() {
         return repository.findAll();
+    }
+    public Optional<Produto> getByIdfind(UUID id){
+        return repository.findById(id);
     }
 }
